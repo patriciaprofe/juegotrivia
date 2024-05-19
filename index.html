@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trivia sobre DOM y JavaScript</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.options{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="question" id="question"></div>
+  <div class="options" id="options"></div>
+  <button onclick="checkAnswer()">Siguiente pregunta</button>
+</div>
+
+<script>
+const questions = [
+  {
+    question: '¿Qué significa DOM en JavaScript?',
+    options: ['Document Object Model', 'Data Object Model', 'Digital Object Model', 'Dynamic Object Model'],
+    answer: 'Document Object Model'
+  },
+  {
+    question: '¿Qué método se utiliza para seleccionar un elemento por su id en JavaScript?',
+    options: ['getElementById', 'querySelector', 'getElementsByClassName', 'querySelectorAll'],
+    answer: 'getElementById'
+  },
+  {
+    question: '¿Cuál es la forma correcta de declarar una variable en JavaScript?',
+    options: ['var', 'let', 'int', 'const'],
+    answer: 'let'
+  },
+  {
+    question: '¿Qué función se utiliza para imprimir en la consola en JavaScript?',
+    options: ['console.log()', 'print()', 'alert()', 'log()'],
+    answer: 'console.log()'
+  },
+  {
+    question: '¿Qué tipo de estructura de datos es un Array en JavaScript?',
+    options: ['Arreglo', 'Lista', 'Objeto', 'Cadena'],
+    answer: 'Arreglo'
+  }
+];
+
+let currentQuestion = 0;
+const questionElement = document.getElementById('question');
+const optionsElement = document.getElementById('options');
+
+function displayQuestion() {
+  const question = questions[currentQuestion];
+  questionElement.textContent = question.question;
+
+  optionsElement.innerHTML = '';
+  question.options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.onclick = () => checkOption(option);
+    optionsElement.appendChild(button);
+  });
+}
+
+function checkOption(option) {
+  if (option === questions[currentQuestion].answer) {
+    alert('¡Respuesta correcta!');
+  } else {
+    alert('Respuesta incorrecta. La respuesta correcta es: ' + questions[currentQuestion].answer);
+  }
+}
+
+function checkAnswer() {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    alert('¡Trivia completada!');
+    currentQuestion = 0;
+    displayQuestion();
+  }
+}
+
+displayQuestion();
+</script>
+</body>
+</html>
