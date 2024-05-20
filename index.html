@@ -56,7 +56,7 @@ button:hover {
 </div>
 
 <script>
-const questions = [
+const questions = [ //define los arreglos de las preguntas
   {
     question: '¿Qué significa DOM en JavaScript?',
     options: ['Document Object Model', 'Data Object Model', 'Digital Object Model', 'Dynamic Object Model'],
@@ -84,32 +84,32 @@ const questions = [
   }
 ];
 
-let currentQuestion = 0;
-const questionElement = document.getElementById('question');
-const optionsElement = document.getElementById('options');
+let currentQuestion = 0; 
+const questionElement = document.getElementById('question'); //toma el elemento question donde se mostrará la pregunta
+const optionsElement = document.getElementById('options'); //toma el elemento options donde se mostrarán los botones de opciones
 
-function displayQuestion() {
-  const question = questions[currentQuestion];
-  questionElement.textContent = question.question;
+function displayQuestion() {  // Muestra las preguntas 
+  const question = questions[currentQuestion]; // sobre la pregunta actual 
+  questionElement.textContent = question.question; // crea la pregunta
 
-  optionsElement.innerHTML = '';
-  question.options.forEach(option => {
-    const button = document.createElement('button');
-    button.textContent = option;
-    button.onclick = () => checkOption(option);
-    optionsElement.appendChild(button);
+  optionsElement.innerHTML = ''; //crea espacio
+  question.options.forEach(option => {   //función => que asigna cada botón
+    const button = document.createElement('button'); //crea el eleemento botón
+    button.textContent = option; // crea el texto de la opción
+    button.onclick = () => checkOption(option);  // al hacr click sobre el botón llama a la fución checkOption
+    optionsElement.appendChild(button); //agrega nuevos botones
   });
 }
 
-function checkOption(option) {
-  if (option === questions[currentQuestion].answer) {
-    alert('¡Respuesta correcta!');
+function checkOption(option) { 
+  if (option === questions[currentQuestion].answer) { //pregunta si la respuesta correcta coincide con la opción elegida
+    alert('¡Respuesta correcta!'); 
   } else {
-    alert('Respuesta incorrecta. La respuesta correcta es: ' + questions[currentQuestion].answer);
+    alert('Respuesta incorrecta. La respuesta correcta es: ' + questions[currentQuestion].answer); // recorre las respuesta hasta llegar a la correcta
   }
 }
 
-function checkAnswer() {
+function checkAnswer() {  // Esta función determinta de acuerdo a la cantidad respondida si se termina la trivia o agrega más preguntas
   currentQuestion++;
   if (currentQuestion < questions.length) {
     displayQuestion();
@@ -120,7 +120,7 @@ function checkAnswer() {
   }
 }
 
-displayQuestion();
+displayQuestion(); //Muestra la siguiente pregunta
 </script>
 </body>
 </html>
